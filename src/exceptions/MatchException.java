@@ -1,3 +1,7 @@
+/**
+ * MatchException.java
+ * Oct 12, 2023 7:35:12 PM
+ */
 package exceptions;
 
 /**
@@ -6,6 +10,6 @@ package exceptions;
  * @author Paul Alejandro Vazquez Cervantes ID:241400
  * @author Jose Eduardo Hinojosa Romero ID: 2356666
  */
-public class MatchException extends Exception{
-    
+public class MatchException extends Exception {
+
 }

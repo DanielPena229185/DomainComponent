@@ -1,6 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Enum.java to edit this template
+/**
+ * FaceTileException.java
+ * Oct 12, 2023 6:21:32 PM
  */
 package enums;
 
@@ -11,5 +11,12 @@ package enums;
  * @author Jose Eduardo Hinojosa Romero ID: 2356666
  */
 public enum Orientation {
-    
+    /**
+     * Horizontal orientation
+     */
+    HORIZONTAL,
+    /**
+     * Vertical orientation
+     */
+    VERTICAL
 }

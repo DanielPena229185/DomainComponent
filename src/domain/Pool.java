@@ -1,8 +1,8 @@
 /**
- * Game.java
- * Oct 12, 2023 6:01:55 PM
+ * Pool.java
+ * Oct 12, 2023 5:59:43 PM
  */
-package interfaces;
+package domain;
 
 /**
  * @author Daniel Armando Peña Garcia ID:229185
@@ -10,6 +10,12 @@ package interfaces;
  * @author Paul Alejandro Vazquez Cervantes ID:241400
  * @author Jose Eduardo Hinojosa Romero ID: 2356666
  */
-public interface Game {
+public class Pool {
 
+    /**
+     *
+     */
+    public Pool() {
+
+    }
 }

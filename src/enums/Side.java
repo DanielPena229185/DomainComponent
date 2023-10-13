@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Enum.java to edit this template
- */
 package enums;
 
 /**
@@ -11,5 +7,20 @@ package enums;
  * @author Jose Eduardo Hinojosa Romero ID: 2356666
  */
 public enum Side {
-    
+    /**
+     * Top side of the tile
+     */
+    TOP,
+    /**
+     * Bottom side of the tile
+     */
+    BOTTOM,
+    /**
+     * Right side of the tile
+     */
+    RIGHT,
+    /**
+     * Left side of the tile
+     */
+    LEFT
 }

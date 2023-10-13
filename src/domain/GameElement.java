@@ -1,8 +1,10 @@
 /**
-* GameElement.java
-* Oct 12, 2023 6:01:41 PM
-*/ 
+ * GameElement.java
+ * Oct 12, 2023 6:01:41 PM
+ */
+package domain;
 
+import interfaces.Game;
 
 /**
  * @author Daniel Armando Peña Garcia ID:229185
@@ -12,10 +14,15 @@
  */
 public class GameElement {
 
+    protected Tile[] tiles;
+    protected Game game;
+
     /**
      *
+     *
+     * @param game
      */
-    public GameElement(){
-
+    public GameElement(Game game) {
+        this.game = game;
     }
 }

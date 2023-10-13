@@ -1,8 +1,8 @@
-
 /**
- * Match.java
- * Oct 12, 2023 5:59:39 PM
+ * Board.java
+ * Oct 12, 2023 5:59:50 PM
  */
+package domain;
 
 /**
  * @author Daniel Armando Peña Garcia ID:229185
@@ -10,16 +10,12 @@
  * @author Paul Alejandro Vazquez Cervantes ID:241400
  * @author Jose Eduardo Hinojosa Romero ID: 2356666
  */
-public class Match {
-
-    private Player[] players;
-    private Board board;
-    private Pool pool;
+public class Board {
 
     /**
-     * Default constructor
+     *
      */
-    public Match() {}
-    
-    
+    public Board() {
+
+    }
 }
