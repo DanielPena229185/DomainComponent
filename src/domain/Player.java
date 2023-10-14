@@ -31,4 +31,7 @@ public class Player extends GameElement {
         this.name = name;
     }
 
+    public void addTiles(){
+        
+    }
 }

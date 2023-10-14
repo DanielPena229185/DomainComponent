@@ -30,9 +30,9 @@ public class Tile {
      * Orientation of the tile (HORIZONTAL, VERTICAL)
      */
     private Orientation orientation;
-    
+
     /**
-     * 
+     *
      */
     private GameElement gameElement;
 
@@ -107,6 +107,40 @@ public class Tile {
      */
     public void setSecondFace(FaceTile secondFace) {
         this.secondFace = secondFace;
+    }
+
+    /**
+     * Get the orientation of the Tile
+     *
+     * @return Orientation of the tile (HORIZONTAL, VERTICAL)
+     */
+    public Orientation getOrientation() {
+        return orientation;
+    }
+
+    /**
+     * Set the orientaion
+     *
+     * @param orientation
+     */
+    public void setOrientation(Orientation orientation) {
+        this.orientation = orientation;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public GameElement getGameElement() {
+        return gameElement;
+    }
+
+    /**
+     *
+     * @param gameElement
+     */
+    public void setGameElement(GameElement gameElement) {
+        this.gameElement = gameElement;
     }
 
     /**
