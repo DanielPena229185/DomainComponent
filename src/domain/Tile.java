@@ -32,7 +32,7 @@ public class Tile {
     private Orientation orientation;
 
     /**
-     *
+     * Represents the game element to which the token belongs.
      */
     private GameElement gameElement;
 
@@ -119,7 +119,7 @@ public class Tile {
     }
 
     /**
-     * Set the orientaion
+     * Set the orientation
      *
      * @param orientation
      */
@@ -128,16 +128,18 @@ public class Tile {
     }
 
     /**
+     * Retrieves the game element associated with this token.
      *
-     * @return
+     * @return The game element to which the token belongs.
      */
     public GameElement getGameElement() {
         return gameElement;
     }
 
     /**
+     * Sets the game element for this token.
      *
-     * @param gameElement
+     * @param gameElement The game element to associate with the token.
      */
     public void setGameElement(GameElement gameElement) {
         this.gameElement = gameElement;
@@ -184,7 +186,7 @@ public class Tile {
                 return secondFace;
             }
         }
-                return null;
+        return null;
     }
 
     public FaceTile getLeftFace() {
@@ -195,9 +197,9 @@ public class Tile {
                 return secondFace;
             }
         }
-                return null;
+        return null;
     }
-    
+
     public FaceTile getTopFace() {
         if (orientation == Orientation.VERTICAL) {
             if (this.firstFace.getSide() == Side.TOP) {
@@ -206,9 +208,9 @@ public class Tile {
                 return secondFace;
             }
         }
-                return null;
+        return null;
     }
-    
+
     public FaceTile getBottomFace() {
         if (orientation == Orientation.VERTICAL) {
             if (this.firstFace.getSide() == Side.BOTTOM) {
@@ -217,8 +219,9 @@ public class Tile {
                 return secondFace;
             }
         }
-                return null;
+        return null;
     }
+
     /**
      * Computes the hash code value for this Tile object based on its
      * attributes. The hash code is calculated using the objects first face,
