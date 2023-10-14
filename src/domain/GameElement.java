@@ -7,7 +7,6 @@ package domain;
 import interfaces.Game;
 import java.util.LinkedList;
 
-
 /**
  * @author Daniel Armando Peña Garcia ID:229185
  * @author Santiago Bojórquez Leyva ID:228475
@@ -27,12 +26,10 @@ public class GameElement {
     protected Game game;
 
     /**
-     * Constructs a GameElement with a reference to the game it belongs to.
+     * Default constructor
      *
-     * @param game The game this element belongs to.
      */
-    public GameElement(Game game) {
-        this.game = game;
+    public GameElement() {
     }
 
     /**

@@ -12,4 +12,15 @@ package exceptions;
  */
 public class MatchException extends Exception {
 
+    public MatchException() {
+    }
+
+    public MatchException(String message) {
+        super(message);
+    }
+
+    public MatchException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
 }
