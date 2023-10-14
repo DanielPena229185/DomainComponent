@@ -4,16 +4,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Dapgp/Documents/GITHUB/DanielPena229185/DomainComponent/src/enums/Side.java</file>
-            <file>file:/C:/Users/Dapgp/Documents/GITHUB/DanielPena229185/DomainComponent/src/domain/FaceTile.java</file>
             <file>file:/C:/Users/Dapgp/Documents/GITHUB/DanielPena229185/DomainComponent/src/domain/GameElement.java</file>
             <file>file:/C:/Users/Dapgp/Documents/GITHUB/DanielPena229185/DomainComponent/src/domain/Player.java</file>
-            <file>file:/C:/Users/Dapgp/Documents/GITHUB/DanielPena229185/DomainComponent/src/domain/Board.java</file>
             <file>file:/C:/Users/Dapgp/Documents/GITHUB/DanielPena229185/DomainComponent/src/enums/Orientation.java</file>
-            <file>file:/C:/Users/Dapgp/Documents/GITHUB/DanielPena229185/DomainComponent/src/interfaces/Game.java</file>
             <file>file:/C:/Users/Dapgp/Documents/GITHUB/DanielPena229185/DomainComponent/src/domain/Tile.java</file>
-            <file>file:/C:/Users/Dapgp/Documents/GITHUB/DanielPena229185/DomainComponent/src/exceptions/FaceTileException.java</file>
-            <file>file:/C:/Users/Dapgp/Documents/GITHUB/DanielPena229185/DomainComponent/src/domain/Pool.java</file>
-            <file>file:/C:/Users/Dapgp/Documents/GITHUB/DanielPena229185/DomainComponent/src/exceptions/MatchException.java</file>
             <file>file:/C:/Users/Dapgp/Documents/GITHUB/DanielPena229185/DomainComponent/src/domain/Match.java</file>
         </group>
     </open-files>
