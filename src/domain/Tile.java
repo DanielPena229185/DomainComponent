@@ -176,6 +176,49 @@ public class Tile {
         return firstFace.getValue() == secondFace.getValue();
     }
 
+    public FaceTile getRightFace() {
+        if (orientation == Orientation.HORIZONTAL) {
+            if (this.firstFace.getSide() == Side.RIGHT) {
+                return firstFace;
+            } else {
+                return secondFace;
+            }
+        }
+                return null;
+    }
+
+    public FaceTile getLeftFace() {
+        if (orientation == Orientation.HORIZONTAL) {
+            if (this.firstFace.getSide() == Side.LEFT) {
+                return firstFace;
+            } else {
+                return secondFace;
+            }
+        }
+                return null;
+    }
+    
+    public FaceTile getTopFace() {
+        if (orientation == Orientation.VERTICAL) {
+            if (this.firstFace.getSide() == Side.TOP) {
+                return firstFace;
+            } else {
+                return secondFace;
+            }
+        }
+                return null;
+    }
+    
+    public FaceTile getBottomFace() {
+        if (orientation == Orientation.VERTICAL) {
+            if (this.firstFace.getSide() == Side.BOTTOM) {
+                return firstFace;
+            } else {
+                return secondFace;
+            }
+        }
+                return null;
+    }
     /**
      * Computes the hash code value for this Tile object based on its
      * attributes. The hash code is calculated using the objects first face,

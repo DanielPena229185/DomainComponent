@@ -29,6 +29,8 @@ public class Match implements Game{
      */
     private Pool pool;
 
+    public Match() {
+    }
     /**
      * Initializes a new Match with the specified players, board, and pool.
      *
