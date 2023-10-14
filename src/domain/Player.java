@@ -20,18 +20,15 @@ public class Player extends GameElement {
     private String name;
 
     /**
-     * Constructs a Player with the specified name and associates it with the
-     * given Game.
+     * Constructs a Player with the specified name
      *
      * @param name The name of the player.
-     * @param game The game to which the player belongs.
      */
-    public Player(String name, Game game) {
-        super(game);
+    public Player(String name) {
         this.name = name;
     }
 
-    public void addTiles(){
-        
+    public void addTiles() {
+
     }
 }

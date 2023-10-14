@@ -15,31 +15,38 @@ import java.util.LinkedList;
  */
 public class Board extends GameElement {
 
-    public Board(Game game) {
-        super(game);
+    public Board() {
         this.tiles = new LinkedList();
     }
 
     public void addTileBeginning(Tile tile) {
+        
         if (this.tiles.isEmpty()) {
             this.tiles.add(tile);
             return;
         }
+        
         Tile firstTile = tiles.getFirst();
+        
         if (firstTile.isMule()) {
+            
             if (tile.getOrientation() != firstTile.getOrientation()) {
                 FaceTile rightFace = tile.getRightFace();
-                FaceTile firstTileLeftFace = firstTile.getFirstFace();
-                if (rightFace.getValue() == firstTileLeftFace.getValue()) {
+                FaceTile firstTileFace = firstTile.getFirstFace();
+                if (rightFace.getValue() == firstTileFace.getValue()) {
                     tiles.addFirst(tile);
                 }
 
             }
+            
         } else {
+            
             if (tile.getOrientation() == firstTile.getOrientation()) {
+                
                 FaceTile rightFace = tile.getRightFace();
-                FaceTile firstTileLeftFace = firstTile.getLeftFace();
-                if (rightFace.getValue() == firstTileLeftFace.getValue()) {
+                FaceTile firstTileFace = firstTile.getLeftFace();
+                
+                if (rightFace.getValue() == firstTileFace.getValue()) {
                     tiles.addFirst(tile);
                 }
             }
@@ -48,24 +55,33 @@ public class Board extends GameElement {
     }
 
     public void addTileEnd(Tile tile) {
+        
         if (this.tiles.isEmpty()) {
             this.tiles.add(tile);
             return;
         }
+        
         Tile lastTile = tiles.getLast();
+        
         if (lastTile.isMule()) {
             if (tile.getOrientation() != lastTile.getOrientation()) {
+                
                 FaceTile leftFace = tile.getLeftFace();
                 FaceTile firstTileLeftFace = lastTile.getFirstFace();
+                
                 if (leftFace.getValue() == firstTileLeftFace.getValue()) {
                     tiles.addLast(tile);
                 }
 
             }
+            
         } else {
+            
             if (tile.getOrientation() == lastTile.getOrientation()) {
+                
                 FaceTile leftFace = tile.getLeftFace();
                 FaceTile firstTileLeftFace = lastTile.getRightFace();
+                
                 if (leftFace.getValue() == firstTileLeftFace.getValue()) {
                     tiles.addLast(tile);
                 }
@@ -73,7 +89,3 @@ public class Board extends GameElement {
         }
     }
 }
-
-/**
- *
- */

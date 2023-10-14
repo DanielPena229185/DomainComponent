@@ -10,7 +10,7 @@ package domain;
  * @author Paul Alejandro Vazquez Cervantes ID:241400
  * @author Jose Eduardo Hinojosa Romero ID: 2356666
  */
-public class Pool {
+public class Pool extends GameElement{
 
     /**
      *
