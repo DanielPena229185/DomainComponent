@@ -5,7 +5,7 @@
 package domain;
 
 import interfaces.Game;
-import java.util.LinkedList;
+import java.util.List;
 
 /**
  * @author Daniel Armando Peña Garcia ID:229185
@@ -18,7 +18,7 @@ public class GameElement {
     /**
      * Set of tiles as contained in the game elements
      */
-    protected LinkedList<Tile> tiles;
+    protected List<Tile> tiles;
 
     /**
      * Interface through which game calls are made
@@ -39,7 +39,7 @@ public class GameElement {
      *
      * @return The list of tiles in the game.
      */
-    public LinkedList<Tile> getTiles() {
+    public List<Tile> getTiles() {
         return tiles;
     }
 
@@ -48,7 +48,7 @@ public class GameElement {
      *
      * @param tiles The list of tiles to associate with the game.
      */
-    public void setTiles(LinkedList<Tile> tiles) {
+    public void setTiles(List<Tile> tiles) {
         this.tiles = tiles;
     }
 
@@ -69,17 +69,4 @@ public class GameElement {
     public void setGame(Game game) {
         this.game = game;
     }
-
-    /**
-     * Adds a tile to the list of tiles in this Game.
-     *
-     * @param tile The Tile to add to the game's list of tiles.
-     */
-    public void addTile(Tile tile) {
-        if (this.tiles == null) {
-            this.tiles = new LinkedList<>();
-        }
-        this.tiles.add(tile);
-    }
-
 }

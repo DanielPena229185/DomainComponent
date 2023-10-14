@@ -30,6 +30,11 @@ public class Tile {
      * Orientation of the tile (HORIZONTAL, VERTICAL)
      */
     private Orientation orientation;
+    
+    /**
+     * 
+     */
+    private GameElement gameElement;
 
     /**
      * Default constructor
