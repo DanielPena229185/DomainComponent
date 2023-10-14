@@ -1,5 +1,6 @@
 package domain;
 
+import dtos.PlayerPickTileDTO;
 import java.util.LinkedList;
 import java.util.Random;
 import exceptions.PoolException;
@@ -67,4 +68,9 @@ public class Pool extends GameElement {
         
         tiles.add(tile);
     }
+    
+    public void pickTileByPlayer(PlayerPickTileDTO pickTile){
+        
+    }
+    
 }
