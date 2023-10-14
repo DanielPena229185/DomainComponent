@@ -4,7 +4,6 @@
  */
 package domain;
 
-import interfaces.Game;
 import java.util.LinkedList;
 
 /**
