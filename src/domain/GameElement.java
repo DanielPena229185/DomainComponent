@@ -5,6 +5,7 @@
 package domain;
 
 import interfaces.Game;
+import java.util.LinkedList;
 
 /**
  * @author Daniel Armando Peña Garcia ID:229185
@@ -14,15 +15,71 @@ import interfaces.Game;
  */
 public class GameElement {
 
-    protected Tile[] tiles;
+    /**
+     * Set of tiles as contained in the game elements
+     */
+    protected LinkedList<Tile> tiles;
+
+    /**
+     * Interface through which game calls are made
+     */
     protected Game game;
 
     /**
+     * Constructs a GameElement with a reference to the game it belongs to.
      *
-     *
-     * @param game
+     * @param game The game this element belongs to.
      */
     public GameElement(Game game) {
         this.game = game;
     }
+
+    /**
+     * Retrieves the list of tiles associated with this Game.
+     *
+     * @return The list of tiles in the game.
+     */
+    public LinkedList<Tile> getTiles() {
+        return tiles;
+    }
+
+    /**
+     * Sets the list of tiles for this Game.
+     *
+     * @param tiles The list of tiles to associate with the game.
+     */
+    public void setTiles(LinkedList<Tile> tiles) {
+        this.tiles = tiles;
+    }
+
+    /**
+     * Retrieves the Game instance associated with these tiles.
+     *
+     * @return The Game instance to which these tiles belong.
+     */
+    public Game getGame() {
+        return game;
+    }
+
+    /**
+     * Associates the provided Game instance with these tiles.
+     *
+     * @param game The Game instance to associate with these tiles.
+     */
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
+    /**
+     * Adds a tile to the list of tiles in this Game.
+     *
+     * @param tile The Tile to add to the game's list of tiles.
+     */
+    public void addTile(Tile tile) {
+        if (this.tiles == null) {
+            this.tiles = new LinkedList<>();
+        }
+        this.tiles.add(tile);
+    }
+
 }

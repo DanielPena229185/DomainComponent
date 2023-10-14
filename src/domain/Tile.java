@@ -6,6 +6,7 @@ package domain;
 
 import enums.Orientation;
 import enums.Side;
+import java.util.Objects;
 
 /**
  * @author Daniel Armando Peña Garcia ID:229185
@@ -136,4 +137,45 @@ public class Tile {
         return firstFace.getValue() == secondFace.getValue();
     }
 
+    /**
+     * Computes the hash code value for this Tile object based on its
+     * attributes. The hash code is calculated using the objects first face,
+     * second face, and orientation.
+     *
+     * @return The computed hash code for this Tile.
+     */
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 71 * hash + Objects.hashCode(this.firstFace);
+        hash = 71 * hash + Objects.hashCode(this.secondFace);
+        hash = 71 * hash + Objects.hashCode(this.orientation);
+        return hash;
+    }
+
+    /**
+     * Indicates whether some other object is "equal to" this Tile. Two Tile
+     * objects are considered equal if they have the same first face, second
+     * face, and orientation values.
+     *
+     * @param obj The object to compare with this Tile for equality.
+     * @return True if this Tile is equal to the specified object; false
+     * otherwise.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        final Tile other = (Tile) obj;
+        if (!Objects.equals(this.firstFace, other.firstFace)
+                || !Objects.equals(this.secondFace, other.secondFace)
+                || this.orientation != other.orientation) {
+            return false;
+        }
+        return true;
+    }
 }
