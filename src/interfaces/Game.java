@@ -4,8 +4,8 @@
  */
 package interfaces;
 
-import domain.GameElement;
 import dtos.PlayerPickTileDTO;
+import exceptions.GameException;
 
 /**
  * @author Daniel Armando Peña Garcia ID:229185
@@ -14,6 +14,6 @@ import dtos.PlayerPickTileDTO;
  * @author Jose Eduardo Hinojosa Romero ID: 2356666
  */
 public interface Game {
-    
-    void pickTileOfPool(GameElement gameElement,  PlayerPickTileDTO playerDTO);
+
+    void pickTileOfPool(PlayerPickTileDTO playerDTO) throws GameException;
 }

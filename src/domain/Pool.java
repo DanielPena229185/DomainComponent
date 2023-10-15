@@ -65,12 +65,23 @@ public class Pool extends GameElement {
         if (tiles == null) {
             throw new PoolException("The tiles list was null");
         }
-        
+
         tiles.add(tile);
     }
-    
-    public void pickTileByPlayer(PlayerPickTileDTO pickTile){
-        
+
+    /**
+     * Checks if the pool is empty
+     *
+     * @return True if the pool is empty; false otherwise
+     * @throws PoolException if the pool of tiles is null (with an optional
+     * message)
+     */
+    public boolean isPoolEmpty() throws PoolException {
+
+        if (this.tiles == null) {
+            throw new PoolException("The pool of tiles is null");
+        }
+
+        return this.tiles.isEmpty();
     }
-    
 }
