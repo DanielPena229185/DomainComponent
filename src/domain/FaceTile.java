@@ -4,6 +4,7 @@
 package domain;
 
 import enums.Side;
+import interfaces.FaceTilePrototype;
 
 /**
  * @author Daniel Armando Peña Garcia ID:229185
@@ -11,7 +12,7 @@ import enums.Side;
  * @author Paul Alejandro Vazquez Cervantes ID:241400
  * @author Jose Eduardo Hinojosa Romero ID: 2356666
  */
-public class FaceTile {
+public class FaceTile implements FaceTilePrototype {
 
     /**
      * Side of the face (TOP, BOTTOM, RIGHT, LEFT)
@@ -39,6 +40,17 @@ public class FaceTile {
     public FaceTile(Side side, int value) {
         this.side = side;
         this.value = value;
+    }
+
+    /**
+     * Creates and returns a new instance of the FaceTile with the same side and
+     * value.
+     *
+     * @return A new FaceTile instance cloned from the current instance.
+     */
+    @Override
+    public FaceTile clone() {
+        return new FaceTile(this.side, this.value);
     }
 
     /**
@@ -96,4 +108,5 @@ public class FaceTile {
             }
         }
     }
+
 }
