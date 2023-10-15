@@ -4,6 +4,9 @@
  */
 package interfaces;
 
+import domain.GameElement;
+import dtos.PlayerPickTileDTO;
+
 /**
  * @author Daniel Armando Peña Garcia ID:229185
  * @author Santiago Bojórquez Leyva ID:228475
@@ -11,5 +14,6 @@ package interfaces;
  * @author Jose Eduardo Hinojosa Romero ID: 2356666
  */
 public interface Game {
-
+    
+    void pickTileOfPool(GameElement gameElement,  PlayerPickTileDTO playerDTO);
 }

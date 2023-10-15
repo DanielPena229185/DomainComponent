@@ -4,7 +4,9 @@
  */
 package domain;
 
+import dtos.PlayerPickTileDTO;
 import exceptions.MatchException;
+import interfaces.Events;
 import interfaces.Game;
 
 /**
@@ -328,4 +330,25 @@ public class Match implements Game {
         this.inGame = inGame;
     }
 
+    @Override
+    public void pickTileOfPool(GameElement gameElement, PlayerPickTileDTO playerDTO) {
+        Pool pool = (Pool)gameElement;
+        
+        
+        for (int i = 0; i < this.players.length; i++) {
+            //if(players[i)
+        }
+    }
+
+  
+
+    
+    
+    class pickTileOfPool implements Events{
+
+        @Override
+        public void doEvent() {
+        }
+         
+   }
 }
