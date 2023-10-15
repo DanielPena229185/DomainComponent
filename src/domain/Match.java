@@ -381,11 +381,13 @@ public class Match implements Game {
     public void pickTileOfPool(PlayerPickTileDTO playerDTO) throws GameException {
 
         try {
-            if (this.pool == null) {
-                throw new MatchException("No game pool found in the match.");
-            }
+
             if (isInGame()) {
                 throw new MatchException("The match is already in progress, and players cannot pick tiles.");
+            }
+
+            if (this.pool == null) {
+                throw new MatchException("No game pool found in the match.");
             }
 
             for (Player player : this.players) {
