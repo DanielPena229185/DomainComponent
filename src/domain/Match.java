@@ -8,6 +8,7 @@ import dtos.PlayerPickTileDTO;
 import exceptions.MatchException;
 import interfaces.Events;
 import interfaces.Game;
+import java.util.LinkedList;
 
 /**
  * @author Daniel Armando Peña Garcia ID:229185
@@ -15,7 +16,7 @@ import interfaces.Game;
  * @author Paul Alejandro Vazquez Cervantes ID:241400
  * @author Jose Eduardo Hinojosa Romero ID: 2356666
  */
-public class Match implements Game {
+public class Match extends GameElement implements Game {
 
     /**
      * An array of Player objects representing the participants in the match.
@@ -44,6 +45,7 @@ public class Match implements Game {
      * Default constructor
      */
     public Match() {
+        this.tiles = new LinkedList();
     }
 
     /**
@@ -224,12 +226,40 @@ public class Match implements Game {
         }
     }
 
-    /**
-     * Finds the index of a player in the player array.
-     *
-     * @param player The player to search for.
-     * @return The index of the player in the array, or -1 if not found.
-     */
+    public void distributeTiles() throws MatchException {
+        if (players == null) {
+            throw new MatchException("The Player's list recived was null.");
+        }
+
+        if (players.length == 0) {
+            throw new MatchException("The Player's list recived was empty.");
+        }
+
+        if (tiles == null) {
+           throw new MatchException("The Tile's list recived was null.");
+        }
+
+        if (tiles.isEmpty()) {
+           throw new MatchException("The Tile's list recived was empty.");
+        }
+
+        int tilesPerPlayer = 7;
+
+        for (Player player : players) {
+            for (int j = 0; j < tilesPerPlayer; j++) {
+                if (!tiles.isEmpty()) {
+                    Tile tile = tiles.removeFirst();
+                    player.tiles.add(tile);
+                }
+            }
+        }
+    }
+        /**
+         * Finds the index of a player in the player array.
+         *
+         * @param player The player to search for.
+         * @return The index of the player in the array, or -1 if not found.
+         */
     private int findPlayerIndex(Player player) {
         for (int i = 0; i < 4; i++) {
             if (this.players[i] == player) {
@@ -332,23 +362,18 @@ public class Match implements Game {
 
     @Override
     public void pickTileOfPool(GameElement gameElement, PlayerPickTileDTO playerDTO) {
-        Pool pool = (Pool)gameElement;
-        
-        
+        Pool pool = (Pool) gameElement;
+
         for (int i = 0; i < this.players.length; i++) {
             //if(players[i)
         }
     }
 
-  
-
-    
-    
-    class pickTileOfPool implements Events{
+    class pickTileOfPool implements Events {
 
         @Override
         public void doEvent() {
         }
-         
-   }
+
+    }
 }
