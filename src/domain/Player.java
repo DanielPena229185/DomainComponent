@@ -4,6 +4,7 @@
  */
 package domain;
 
+import dtos.DeleteTileFromPlayerDTO;
 import exceptions.PlayerException;
 import java.util.LinkedList;
 import java.util.List;
@@ -97,6 +98,62 @@ public class Player extends GameElement {
             throw new PlayerException("Player's tile collection is null.");
         }
         this.tiles.addAll(tiles);
+    }
+
+    /**
+     * Retrieves a Tile object by its unique identifier (ID) from the collection
+     * of tiles.
+     *
+     * @param id The ID of the tile to retrieve.
+     * @return The Tile object with the specified ID, or null if no matching
+     * tile is found.
+     * @throws PlayerException if no tile with the specified ID is found in the
+     * collection.
+     */
+    private Tile getTileById(Integer id) throws PlayerException {
+
+        for (Tile tile : tiles) {
+            if (tile.getId() == id) {
+                return tile;
+            }
+        }
+
+        throw new PlayerException("Tile with ID " + id + " not found in the player's collection.");
+    }
+
+    /**
+     * Deletes a Tile from the player's collection based on the provided
+     * DeleteTileFromPlayerDTO.
+     *
+     * @param deleteTileDTO A data transfer object containing the ID of the tile
+     * to be deleted.
+     * @return The Tile that has been deleted from the player's collection.
+     * @throws PlayerException if the specified tile ID is not found in the
+     * player's collection.
+     */
+    public Tile deleteTile(DeleteTileFromPlayerDTO deleteTileDTO) throws PlayerException {
+
+        Tile removeTile = this.getTileById(deleteTileDTO.getId());
+
+        this.tiles.remove(removeTile);
+
+        return removeTile;
+    }
+
+    /**
+     * Removes all tiles from the player's collection and returns a list of the
+     * removed tiles.
+     *
+     * @return A list of tiles that have been removed from the player's
+     * collection.
+     */
+    public List<Tile> deleteAllTiles() {
+        
+        List<Tile> removedTiles = this.getTiles();
+
+        this.tiles = new LinkedList<>();
+
+        return removedTiles;
     }
 
 }
