@@ -38,6 +38,11 @@ public class Tile {
     private GameElement gameElement;
 
     /**
+     * Id of the tile
+     */
+    private Integer id;
+
+    /**
      * Default constructor
      */
     public Tile() {
@@ -49,16 +54,15 @@ public class Tile {
      *
      * @param firstFace First face of the tile, with default side "TOP"
      * @param secondFace First face of the tile, with default side "BOTTOM"
+     * @param id Id of the tile
      */
-    public Tile(FaceTilePrototype firstFace, FaceTilePrototype secondFace) {
+    public Tile(Integer id, FaceTilePrototype firstFace, FaceTilePrototype secondFace) {
 
+        this.id = id;
         this.firstFace = firstFace.clone();
         this.secondFace = secondFace.clone();
         this.orientation = Orientation.VERTICAL;
-
-        //Default side values
-        this.firstFace.setSide(Side.TOP);
-        this.secondFace.setSide(Side.BOTTOM);
+        this.defaultFaceSideValuesByOrientation();
     }
 
     /**
@@ -67,8 +71,11 @@ public class Tile {
      * @param firstFace First face of the tile
      * @param secondFace Second face of the tile
      * @param orientation Orientation of the tile (HORIZONTAL, VERTICAL)
+     * @param id Id of the tile
      */
-    public Tile(FaceTilePrototype firstFace, FaceTilePrototype secondFace, Orientation orientation) {
+    public Tile(Integer id, FaceTilePrototype firstFace, FaceTilePrototype secondFace, Orientation orientation) {
+
+        this.id = id;
         this.firstFace = firstFace.clone();
         this.secondFace = secondFace.clone();
         this.orientation = orientation;
@@ -164,6 +171,24 @@ public class Tile {
      */
     public void setGameElement(GameElement gameElement) {
         this.gameElement = gameElement;
+    }
+
+    /**
+     * Gets the unique identifier (ID) associated with this object.
+     *
+     * @return The ID of the object.
+     */
+    public Integer getId() {
+        return id;
+    }
+
+    /**
+     * Sets the unique identifier (ID) for this object.
+     *
+     * @param id The new ID to be assigned to the object.
+     */
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     /**

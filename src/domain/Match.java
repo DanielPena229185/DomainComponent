@@ -45,8 +45,7 @@ public class Match implements Game {
     /**
      * Default constructor
      */
-    public Match() {
-    }
+    public Match(){}
 
     /**
      * Initializes a new Match with the specified players, board, and pool.
