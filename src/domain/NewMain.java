@@ -24,10 +24,10 @@ public class NewMain {
         Player player4 = new Player("Alejandro");
 
         Player players[] = {player1, player2, player3};
-        Board board = new Board();
-        Pool pool = new Pool();
+        Board board = Board.getInstance();
+        Pool pool = Pool.getInstance();
 
-        Match match = new Match(players, board, pool);
+        Match match = new Match(players, board, pool, 7);
 
         FaceTile faceTile1 = new FaceTile(Side.TOP, 1);
         FaceTile faceTile2 = new FaceTile(Side.TOP, 2);

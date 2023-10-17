@@ -16,9 +16,15 @@ import java.util.List;
 public class Pool extends GameElement {
 
     /**
-     * Initializes an empty pool of tiles.
+     * Private static attribute that holds a single instance of the Pool class.
      */
-    public Pool() {
+    private static Pool pool;
+
+    /**
+     * Private constructor for the Pool class. Initializes an empty pool of
+     * tiles as a new LinkedList.
+     */
+    private Pool() {
         this.tiles = new LinkedList();
     }
 
@@ -95,7 +101,7 @@ public class Pool extends GameElement {
      * tiles are available.
      */
     public void pickTileByPlayer(PlayerPickTileDTO playerDTO) throws PoolException {
-        
+
         if (this.tiles.isEmpty()) {
             throw new PoolException("Tile pool is empty. No more tiles are available.");
         }
@@ -105,7 +111,20 @@ public class Pool extends GameElement {
         } catch (GameException e) {
             throw new PoolException(e.getMessage(), e);
         }
-        
+
+    }
+
+    /**
+     * Returns a singleton instance of the Pool class. If the instance doesn't
+     * exist, it creates one.
+     *
+     * @return The singleton instance of the Pool.
+     */
+    public static Pool getInstance() {
+        if (pool == null) {
+            pool = new Pool();
+        }
+        return pool;
     }
 
 }
