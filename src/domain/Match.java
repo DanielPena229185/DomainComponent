@@ -5,16 +5,17 @@
 package domain;
 
 import dtos.PlayerPickTileDTO;
+import exceptions.GameException;
 import exceptions.MatchException;
+import exceptions.PlayerException;
 import exceptions.PoolException;
-import interfaces.Events;
 import interfaces.Game;
 import java.util.LinkedList;
 import java.util.List;
 
 /**
- * @author Daniel Armando Peña Garcia ID:229185
- * @author Santiago Bojórquez Leyva ID:228475
+ * @author Daniel Armando PeÃ±a Garcia ID:229185
+ * @author Santiago BojÃ³rquez Leyva ID:228475
  * @author Paul Alejandro Vazquez Cervantes ID:241400
  * @author Jose Eduardo Hinojosa Romero ID: 2356666
  */
@@ -140,6 +141,43 @@ public class Match implements Game {
         }
 
         pool.setGame(this);
+    }
+
+    /**
+     * Retrieves the index of the player whose turn it currently is in the game.
+     *
+     * @return The index of the player whose turn it is, or -1 if no player is
+     * currently in turn.
+     */
+    private int getPlayerIndexInTurn() {
+        for (int i = 0; i < this.players.length; i++) {
+            Player playerSelected = this.players[i];
+            if (playerSelected != null && playerSelected.isTurn()) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * Passes the current player's turn to the next player in line.
+     *
+     * @throws MatchException if there is no player currently in turn,
+     * indicating an invalid turn change.
+     */
+    public void passTurn() throws MatchException {
+        int playerIndexInTurn = this.getPlayerIndexInTurn();
+        int nextTurn;
+
+        if (playerIndexInTurn == -1) {
+            throw new MatchException("No player is currently in turn, cannot pass the turn.");
+        }
+
+        if (playerIndexInTurn == (this.players.length - 1)) {
+            nextTurn = 0;
+        } else {
+            nextTurn = playerIndexInTurn + 1;
+        }
     }
 
     /**
@@ -358,19 +396,37 @@ public class Match implements Game {
         this.inGame = inGame;
     }
 
-    @Override
-    public void pickTileOfPool(GameElement gameElement, PlayerPickTileDTO playerDTO) {
-        Pool pool = (Pool) gameElement;
+    /**
+     * Allows players to pick a tile from the game's pool if the match is not
+     * yet in progress.
+     *
+     * @param playerDTO A data transfer object representing the player's choice.
+     * @throws GameException if: - No game pool is found in the match. - The
+     * match is already in progress, and players cannot pick tiles.
+     */
+    public void pickTileOfPool(PlayerPickTileDTO playerDTO) throws GameException {
 
-        for (int i = 0; i < this.players.length; i++) {
-            //if(players[i)
-        }
-    }
+        try {
 
-    class pickTileOfPool implements Events {
+            if (isInGame()) {
+                throw new MatchException("The match is already in progress, and players cannot pick tiles.");
+            }
 
-        @Override
-        public void doEvent() {
+            if (this.pool == null) {
+                throw new MatchException("No game pool found in the match.");
+            }
+
+            for (Player player : this.players) {
+                if (player != null && player.isTurn()) {
+                    this.pool.isPoolEmpty();
+                    Tile tilePicked = this.pool.getRandomTile();
+                    player.addTile(tilePicked);
+                    this.passTurn();
+                    break;
+                }
+            }
+        } catch (PoolException | PlayerException | MatchException e) {
+            throw new GameException(e.getMessage(), e);
         }
 
     }

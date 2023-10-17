@@ -6,6 +6,7 @@ package domain;
 
 import enums.Orientation;
 import enums.Side;
+import interfaces.FaceTilePrototype;
 import java.util.Objects;
 
 /**
@@ -32,9 +33,14 @@ public class Tile {
     private Orientation orientation;
 
     /**
-     *
+     * Represents the game element to which the token belongs.
      */
     private GameElement gameElement;
+
+    /**
+     * Id of the tile
+     */
+    private Integer id;
 
     /**
      * Default constructor
@@ -48,16 +54,15 @@ public class Tile {
      *
      * @param firstFace First face of the tile, with default side "TOP"
      * @param secondFace First face of the tile, with default side "BOTTOM"
+     * @param id Id of the tile
      */
-    public Tile(FaceTile firstFace, FaceTile secondFace) {
+    public Tile(Integer id, FaceTilePrototype firstFace, FaceTilePrototype secondFace) {
 
-        //Default side values
-        firstFace.setSide(Side.TOP);
-        secondFace.setSide(Side.BOTTOM);
-
-        this.firstFace = firstFace;
-        this.secondFace = secondFace;
+        this.id = id;
+        this.firstFace = firstFace.clone();
+        this.secondFace = secondFace.clone();
         this.orientation = Orientation.VERTICAL;
+        this.defaultFaceSideValuesByOrientation();
     }
 
     /**
@@ -66,11 +71,34 @@ public class Tile {
      * @param firstFace First face of the tile
      * @param secondFace Second face of the tile
      * @param orientation Orientation of the tile (HORIZONTAL, VERTICAL)
+     * @param id Id of the tile
      */
-    public Tile(FaceTile firstFace, FaceTile secondFace, Orientation orientation) {
-        this.firstFace = firstFace;
-        this.secondFace = secondFace;
+    public Tile(Integer id, FaceTilePrototype firstFace, FaceTilePrototype secondFace, Orientation orientation) {
+
+        this.id = id;
+        this.firstFace = firstFace.clone();
+        this.secondFace = secondFace.clone();
         this.orientation = orientation;
+        this.defaultFaceSideValuesByOrientation();
+    }
+
+    /**
+     * Sets the default side values for the first and second faces based on the
+     * current orientation. If the orientation is horizontal, the first face is
+     * set to the top and the second face is set to the bottom. If the
+     * orientation is vertical, the first face is set to the left, and the
+     * second face is set to the right.
+     */
+    private void defaultFaceSideValuesByOrientation() {
+        if (this.orientation == Orientation.HORIZONTAL) {
+            this.firstFace.setSide(Side.TOP);
+            this.secondFace.setSide(Side.BOTTOM);
+        }
+
+        if (this.orientation == Orientation.VERTICAL) {
+            this.firstFace.setSide(Side.LEFT);
+            this.secondFace.setSide(Side.RIGHT);
+        }
     }
 
     /**
@@ -119,7 +147,7 @@ public class Tile {
     }
 
     /**
-     * Set the orientaion
+     * Set the orientation
      *
      * @param orientation
      */
@@ -128,19 +156,39 @@ public class Tile {
     }
 
     /**
+     * Retrieves the game element associated with this token.
      *
-     * @return
+     * @return The game element to which the token belongs.
      */
     public GameElement getGameElement() {
         return gameElement;
     }
 
     /**
+     * Sets the game element for this token.
      *
-     * @param gameElement
+     * @param gameElement The game element to associate with the token.
      */
     public void setGameElement(GameElement gameElement) {
         this.gameElement = gameElement;
+    }
+
+    /**
+     * Gets the unique identifier (ID) associated with this object.
+     *
+     * @return The ID of the object.
+     */
+    public Integer getId() {
+        return id;
+    }
+
+    /**
+     * Sets the unique identifier (ID) for this object.
+     *
+     * @param id The new ID to be assigned to the object.
+     */
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     /**
@@ -176,6 +224,14 @@ public class Tile {
         return firstFace.getValue() == secondFace.getValue();
     }
 
+    /**
+     * Gets the FaceTile representing the right face based on the current
+     * orientation. If the orientation is horizontal, it returns the FaceTile
+     * with the Side.RIGHT attribute. Otherwise, it returns null.
+     *
+     * @return The FaceTile representing the right face, or null if the
+     * orientation is not horizontal.
+     */
     public FaceTile getRightFace() {
         if (orientation == Orientation.HORIZONTAL) {
             if (this.firstFace.getSide() == Side.RIGHT) {
@@ -184,9 +240,17 @@ public class Tile {
                 return secondFace;
             }
         }
-                return null;
+        return null;
     }
 
+    /**
+     * Gets the FaceTile representing the left face based on the current
+     * orientation. If the orientation is horizontal, it returns the FaceTile
+     * with the Side.LEFT attribute. Otherwise, it returns null.
+     *
+     * @return The FaceTile representing the left face, or null if the
+     * orientation is not horizontal.
+     */
     public FaceTile getLeftFace() {
         if (orientation == Orientation.HORIZONTAL) {
             if (this.firstFace.getSide() == Side.LEFT) {
@@ -195,9 +259,17 @@ public class Tile {
                 return secondFace;
             }
         }
-                return null;
+        return null;
     }
-    
+
+    /**
+     * Gets the FaceTile representing the top face based on the current
+     * orientation. If the orientation is vertical, it returns the FaceTile with
+     * the Side.TOP attribute. Otherwise, it returns null.
+     *
+     * @return The FaceTile representing the top face, or null if the
+     * orientation is not vertical.
+     */
     public FaceTile getTopFace() {
         if (orientation == Orientation.VERTICAL) {
             if (this.firstFace.getSide() == Side.TOP) {
@@ -206,9 +278,17 @@ public class Tile {
                 return secondFace;
             }
         }
-                return null;
+        return null;
     }
-    
+
+    /**
+     * Gets the FaceTile representing the bottom face based on the current
+     * orientation. If the orientation is vertical, it returns the FaceTile with
+     * the Side.BOTTOM attribute. Otherwise, it returns null.
+     *
+     * @return The FaceTile representing the bottom face, or null if the
+     * orientation is not vertical.
+     */
     public FaceTile getBottomFace() {
         if (orientation == Orientation.VERTICAL) {
             if (this.firstFace.getSide() == Side.BOTTOM) {
@@ -217,8 +297,9 @@ public class Tile {
                 return secondFace;
             }
         }
-                return null;
+        return null;
     }
+
     /**
      * Computes the hash code value for this Tile object based on its
      * attributes. The hash code is calculated using the objects first face,

@@ -1,14 +1,15 @@
 package domain;
 
 import dtos.PlayerPickTileDTO;
+import exceptions.GameException;
 import java.util.LinkedList;
 import java.util.Random;
 import exceptions.PoolException;
 import java.util.List;
 
 /**
- * @author Daniel Armando Peña Garcia ID:229185
- * @author Santiago Bojórquez Leyva ID:228475
+ * @author Daniel Armando PeÃ±a Garcia ID:229185
+ * @author Santiago BojÃ³rquez Leyva ID:228475
  * @author Paul Alejandro Vazquez Cervantes ID:241400
  * @author Jose Eduardo Hinojosa Romero ID: 2356666
  */
@@ -66,19 +67,45 @@ public class Pool extends GameElement {
         if (tiles == null) {
             throw new PoolException("The tiles list was null");
         }
-        
+
         tiles.add(tile);
     }
-    
-    public List<Tile> buildTiles(){
+
+    /**
+     * Checks if the pool is empty
+     *
+     * @return True if the pool is empty; false otherwise
+     * @throws PoolException if the pool of tiles is null (with an optional
+     * message)
+     */
+    public boolean isPoolEmpty() throws PoolException {
+
+        if (this.tiles == null) {
+            throw new PoolException("The pool of tiles is null");
+        }
+
+        return this.tiles.isEmpty();
+    }
+
+    /**
+     * Allows a player to pick a tile from the tile pool.
+     *
+     * @param playerDTO A data transfer object containing player information.
+     * @throws PoolException if the tile pool is empty, indicating that no more
+     * tiles are available.
+     */
+    public void pickTileByPlayer(PlayerPickTileDTO playerDTO) throws PoolException {
         
-        return null;
-        
-    } 
-    
-    
-    public void pickTileByPlayer(PlayerPickTileDTO pickTile){
+        if (this.tiles.isEmpty()) {
+            throw new PoolException("Tile pool is empty. No more tiles are available.");
+        }
+
+        try {
+            this.game.pickTileOfPool(playerDTO);
+        } catch (GameException e) {
+            throw new PoolException(e.getMessage(), e);
+        }
         
     }
-    
+
 }
