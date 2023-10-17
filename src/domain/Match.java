@@ -10,10 +10,12 @@ import exceptions.MatchException;
 import exceptions.PlayerException;
 import exceptions.PoolException;
 import interfaces.Game;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
- * @author Daniel Armando Peña Garcia ID:229185
- * @author Santiago Bojórquez Leyva ID:228475
+ * @author Daniel Armando PeÃ±a Garcia ID:229185
+ * @author Santiago BojÃ³rquez Leyva ID:228475
  * @author Paul Alejandro Vazquez Cervantes ID:241400
  * @author Jose Eduardo Hinojosa Romero ID: 2356666
  */
@@ -34,6 +36,8 @@ public class Match implements Game {
      */
     private Pool pool;
 
+    private final int defaultTilesAmount;
+
     /**
      * Indicates whether the game is currently in progress or not.
      *
@@ -43,22 +47,19 @@ public class Match implements Game {
     private boolean inGame = false;
 
     /**
-     * Default constructor
-     */
-    public Match(){}
-
-    /**
      * Initializes a new Match with the specified players, board, and pool.
      *
      * @param players An array of Player objects representing the participants
      * in the match.
      * @param board The game board where the match takes place.
      * @param pool The pool of game pieces or tiles used in the match.
+     * @param defaultTilesAmount The configuration of the Tiles amount.
      */
-    public Match(Player[] players, Board board, Pool pool) {
+    public Match(Player[] players, Board board, Pool pool, int defaultTilesAmount) {
         this.players = players;
         this.board = board;
         this.pool = pool;
+        this.defaultTilesAmount = defaultTilesAmount;
     }
 
     /**
@@ -262,6 +263,33 @@ public class Match implements Game {
         }
     }
 
+    public void distributeTiles() throws MatchException, PoolException {
+
+        LinkedList<Tile> Tiles = pool.buildTiles();
+
+        if (players == null) {
+            throw new MatchException("The Player's list recived was null.");
+        }
+
+        if (players.length == 0) {
+            throw new MatchException("The Player's list recived was empty.");
+        }
+
+        if (Tiles == null) {
+            throw new MatchException("The Tile's list recived was null.");
+        }
+
+        if (Tiles.isEmpty()) {
+            throw new MatchException("The Tile's list recived was empty.");
+        }
+
+        for (Player player : players) {
+            for (int j = 0; j < defaultTilesAmount; j++) {
+                player.tiles.add(pool.getRandomTile());
+            }
+        }
+    }
+
     /**
      * Finds the index of a player in the player array.
      *
@@ -376,7 +404,6 @@ public class Match implements Game {
      * @throws GameException if: - No game pool is found in the match. - The
      * match is already in progress, and players cannot pick tiles.
      */
-    @Override
     public void pickTileOfPool(PlayerPickTileDTO playerDTO) throws GameException {
 
         try {
@@ -401,5 +428,6 @@ public class Match implements Game {
         } catch (PoolException | PlayerException | MatchException e) {
             throw new GameException(e.getMessage(), e);
         }
+
     }
 }

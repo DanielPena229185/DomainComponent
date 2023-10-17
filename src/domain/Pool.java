@@ -5,10 +5,11 @@ import exceptions.GameException;
 import java.util.LinkedList;
 import java.util.Random;
 import exceptions.PoolException;
+import java.util.List;
 
 /**
- * @author Daniel Armando Peña Garcia ID:229185
- * @author Santiago Bojórquez Leyva ID:228475
+ * @author Daniel Armando PeÃ±a Garcia ID:229185
+ * @author Santiago BojÃ³rquez Leyva ID:228475
  * @author Paul Alejandro Vazquez Cervantes ID:241400
  * @author Jose Eduardo Hinojosa Romero ID: 2356666
  */
