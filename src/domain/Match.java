@@ -264,7 +264,6 @@ public class Match implements Game {
 
     public void distributeTiles() throws MatchException, PoolException {
 
-        LinkedList<Tile> Tiles = null; //pool.buildTiles();
 
         if (players == null) {
             throw new MatchException("The Player's list recived was null.");
@@ -274,13 +273,7 @@ public class Match implements Game {
             throw new MatchException("The Player's list recived was empty.");
         }
 
-        if (Tiles == null) {
-            throw new MatchException("The Tile's list recived was null.");
-        }
-
-        if (Tiles.isEmpty()) {
-            throw new MatchException("The Tile's list recived was empty.");
-        }
+      
 
         for (Player player : players) {
             for (int j = 0; j < defaultTilesAmount; j++) {

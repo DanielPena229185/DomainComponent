@@ -1,10 +1,13 @@
 package domain;
 
 import dtos.PlayerPickTileDTO;
+import enums.Side;
 import exceptions.GameException;
 import java.util.LinkedList;
 import java.util.Random;
 import exceptions.PoolException;
+import interfaces.FaceTilePrototype;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,7 +27,7 @@ public class Pool extends GameElement {
      * Private constructor for the Pool class. Initializes an empty pool of
      * tiles as a new LinkedList.
      */
-    private Pool() {
+    Pool() {
         this.tiles = new LinkedList();
     }
 
@@ -42,6 +45,28 @@ public class Pool extends GameElement {
         } else {
             tiles.addAll(tiles);
         }
+    }
+
+    public List<Tile> createDominoTiles() {
+        List<Tile> tiles = new ArrayList<>();
+        int tileId = 1;  // Identificador de ficha
+
+    for (int value1 = 0; value1 <= 6; value1++) {
+    for (int value2 = value1; value2 <= 6; value2++) { // Corrección en la condición
+        // Crea dos caras con los valores correspondientes
+        FaceTilePrototype firstFacePrototype = new FaceTile(Side.TOP, value1);
+        FaceTilePrototype secondFacePrototype = new FaceTile(Side.BOTTOM, value2);
+
+        // Crea una ficha de dominó y agrégala a la lista
+        Tile tile = new Tile(tileId, firstFacePrototype, secondFacePrototype);
+        System.out.println(tile.toString());
+        tiles.add(tile);
+        tileId++;
+    }
+}
+
+
+        return tiles;
     }
 
     /**
