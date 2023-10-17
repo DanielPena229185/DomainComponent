@@ -15,7 +15,16 @@ import java.util.LinkedList;
  */
 public class Board extends GameElement {
 
-    public Board() {
+    /**
+     * Private static attribute that holds a single instance of the Board class.
+     */
+    private static Board board;
+
+    /**
+     * Private constructor for the Board class. Initializes the `tiles`
+     * attribute as a new LinkedList.
+     */
+    private Board() {
         this.tiles = new LinkedList();
     }
 
@@ -219,6 +228,19 @@ public class Board extends GameElement {
                 throw new BoardException("Cannot connect a mule tile to another tile with the same orientation.");
             }
         }
+    }
+
+    /**
+     * Returns a singleton instance of the Board class. If the instance doesn't
+     * exist, it creates one.
+     *
+     * @return The singleton instance of the Board.
+     */
+    public static Board getInstance() {
+        if (board == null) {
+            board = new Board();
+        }
+        return board;
     }
 
 }

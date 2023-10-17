@@ -11,7 +11,6 @@ import exceptions.PlayerException;
 import exceptions.PoolException;
 import interfaces.Game;
 import java.util.LinkedList;
-import java.util.List;
 
 /**
  * @author Daniel Armando Peña Garcia ID:229185
@@ -265,7 +264,7 @@ public class Match implements Game {
 
     public void distributeTiles() throws MatchException, PoolException {
 
-        LinkedList<Tile> Tiles = pool.buildTiles();
+        LinkedList<Tile> Tiles = null; //pool.buildTiles();
 
         if (players == null) {
             throw new MatchException("The Player's list recived was null.");
