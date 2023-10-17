@@ -6,9 +6,11 @@ package domain;
 
 import dtos.PlayerPickTileDTO;
 import exceptions.MatchException;
+import exceptions.PoolException;
 import interfaces.Events;
 import interfaces.Game;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * @author Daniel Armando Peña Garcia ID:229185
@@ -16,7 +18,7 @@ import java.util.LinkedList;
  * @author Paul Alejandro Vazquez Cervantes ID:241400
  * @author Jose Eduardo Hinojosa Romero ID: 2356666
  */
-public class Match extends GameElement implements Game {
+public class Match implements Game {
 
     /**
      * An array of Player objects representing the participants in the match.
@@ -33,6 +35,8 @@ public class Match extends GameElement implements Game {
      */
     private Pool pool;
 
+    private final int defaultTilesAmount;
+
     /**
      * Indicates whether the game is currently in progress or not.
      *
@@ -42,24 +46,19 @@ public class Match extends GameElement implements Game {
     private boolean inGame = false;
 
     /**
-     * Default constructor
-     */
-    public Match() {
-        this.tiles = new LinkedList();
-    }
-
-    /**
      * Initializes a new Match with the specified players, board, and pool.
      *
      * @param players An array of Player objects representing the participants
      * in the match.
      * @param board The game board where the match takes place.
      * @param pool The pool of game pieces or tiles used in the match.
+     * @param defaultTilesAmount The configuration of the Tiles amount.
      */
-    public Match(Player[] players, Board board, Pool pool) {
+    public Match(Player[] players, Board board, Pool pool, int defaultTilesAmount) {
         this.players = players;
         this.board = board;
         this.pool = pool;
+        this.defaultTilesAmount = defaultTilesAmount;
     }
 
     /**
@@ -226,7 +225,10 @@ public class Match extends GameElement implements Game {
         }
     }
 
-    public void distributeTiles() throws MatchException {
+    public void distributeTiles() throws MatchException, PoolException {
+
+        LinkedList<Tile> Tiles = pool.buildTiles();
+
         if (players == null) {
             throw new MatchException("The Player's list recived was null.");
         }
@@ -235,31 +237,27 @@ public class Match extends GameElement implements Game {
             throw new MatchException("The Player's list recived was empty.");
         }
 
-        if (tiles == null) {
-           throw new MatchException("The Tile's list recived was null.");
+        if (Tiles == null) {
+            throw new MatchException("The Tile's list recived was null.");
         }
 
-        if (tiles.isEmpty()) {
-           throw new MatchException("The Tile's list recived was empty.");
+        if (Tiles.isEmpty()) {
+            throw new MatchException("The Tile's list recived was empty.");
         }
-
-        int tilesPerPlayer = 7;
 
         for (Player player : players) {
-            for (int j = 0; j < tilesPerPlayer; j++) {
-                if (!tiles.isEmpty()) {
-                    Tile tile = tiles.removeFirst();
-                    player.tiles.add(tile);
-                }
+            for (int j = 0; j < defaultTilesAmount; j++) {
+                player.tiles.add(pool.getRandomTile());
             }
         }
     }
-        /**
-         * Finds the index of a player in the player array.
-         *
-         * @param player The player to search for.
-         * @return The index of the player in the array, or -1 if not found.
-         */
+
+    /**
+     * Finds the index of a player in the player array.
+     *
+     * @param player The player to search for.
+     * @return The index of the player in the array, or -1 if not found.
+     */
     private int findPlayerIndex(Player player) {
         for (int i = 0; i < 4; i++) {
             if (this.players[i] == player) {

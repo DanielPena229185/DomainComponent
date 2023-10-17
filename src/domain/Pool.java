@@ -4,6 +4,7 @@ import dtos.PlayerPickTileDTO;
 import java.util.LinkedList;
 import java.util.Random;
 import exceptions.PoolException;
+import java.util.List;
 
 /**
  * @author Daniel Armando Peña Garcia ID:229185
@@ -68,6 +69,13 @@ public class Pool extends GameElement {
         
         tiles.add(tile);
     }
+    
+    public List<Tile> buildTiles(){
+        
+        return null;
+        
+    } 
+    
     
     public void pickTileByPlayer(PlayerPickTileDTO pickTile){
         
