@@ -20,19 +20,20 @@ public class Board extends GameElement {
     }
 
     /**
-     * Adds a tile to the beginning of the list of tiles, taking into account
-     * the type of the first tile and its compatibility with the new tile.
+     * Adds a tile to the beginning of the list of tiles, considering the type
+     * of the first tile and its compatibility with the new tile.
      *
      * @param newTile The tile to be added to the beginning.
+     * @throws BoardException if the new tile cannot be added due to
+     * compatibility issues.
      */
     public void addTileBeginning(Tile newTile) throws BoardException {
-
         if (newTile == null) {
             throw new BoardException("Cannot add a null tile to the board.");
         }
 
         if (this.tiles.isEmpty() && !newTile.isMule()) {
-            throw new BoardException("Cannot add a non-mule tile.");
+            throw new BoardException("Cannot add a non-mule tile as the first tile.");
         }
 
         if (this.tiles.isEmpty() && newTile.isMule()) {
@@ -41,6 +42,10 @@ public class Board extends GameElement {
         }
 
         Tile firstTile = tiles.getFirst();
+
+        if (newTile.isMule() && firstTile.isMule()) {
+            throw new BoardException("Two mule tiles cannot be connected.");
+        }
 
         if (firstTile.isMule()) {
             addTileBeginningForMule(newTile, firstTile);
@@ -80,33 +85,55 @@ public class Board extends GameElement {
      */
     private void addTileBeginningForNonMule(Tile newTile, Tile firstTile) throws BoardException {
 
-        if (newTile.getOrientation() == firstTile.getOrientation()) {
-            FaceTile newTileRightFace = newTile.getRightFace();
-            FaceTile firstTileLeftFace = firstTile.getLeftFace();
+        if (!newTile.isMule()) {
 
-            if (newTileRightFace.getValue() == firstTileLeftFace.getValue()) {
-                tiles.addFirst(newTile);
+            if (newTile.getOrientation() == firstTile.getOrientation()) {
+
+                FaceTile newTileRightFace = newTile.getRightFace();
+                FaceTile firstTileLeftFace = firstTile.getLeftFace();
+
+                if (newTileRightFace.getValue() == firstTileLeftFace.getValue()) {
+                    tiles.addFirst(newTile);
+                } else {
+                    throw new BoardException("The right face must be equal to the tile's left face value.");
+                }
             } else {
-                throw new BoardException("The right face must be equal to the tile's left face value.");
+                throw new BoardException("The orientation must be equal to the tile.");
             }
-        } else {
-            throw new BoardException("The orientation must be equal to the tile.");
         }
+
+        if (newTile.isMule()) {
+            if (newTile.getOrientation() != firstTile.getOrientation()) {
+                FaceTile getFirstFace = newTile.getFirstFace();
+                FaceTile firstTileLeftFace = firstTile.getLeftFace();
+
+                if (getFirstFace.getValue() == firstTileLeftFace.getValue()) {
+                    tiles.addFirst(newTile);
+                } else {
+                    throw new BoardException("Cannot connect a mule tile to another tile if the left face values do not match.");
+                }
+            } else {
+                throw new BoardException("Cannot connect a mule tile to another tile with the same orientation.");
+            }
+        }
+
     }
 
     /**
-     * Adds a tile to the end of the list of tiles, taking into account the type
-     * of the last tile and its compatibility with the new tile.newTile@param
-     * tile The tile to be added to the end.
+     * Adds a tile to the end of the list of tiles, considering the type of the
+     * last tile and its compatibility with the new tile.
+     *
+     * @param newTile The tile to be added to the end.
+     * @throws BoardException if the new tile cannot be added due to
+     * compatibility issues.
      */
     public void addTileEnd(Tile newTile) throws BoardException {
-
         if (newTile == null) {
             throw new BoardException("Cannot add a null tile to the board.");
         }
 
         if (this.tiles.isEmpty() && !newTile.isMule()) {
-            throw new BoardException("Cannot add a non-mule tile.");
+            throw new BoardException("Cannot add a non-mule tile as the first tile.");
         }
 
         if (this.tiles.isEmpty() && newTile.isMule()) {
@@ -115,6 +142,10 @@ public class Board extends GameElement {
         }
 
         Tile lastTile = tiles.getLast();
+
+        if (newTile.isMule() && lastTile.isMule()) {
+            throw new BoardException("Two mule tiles cannot be connected.");
+        }
 
         if (lastTile.isMule()) {
             addTileEndForMule(newTile, lastTile);
@@ -156,16 +187,37 @@ public class Board extends GameElement {
      * orientation.
      */
     private void addTileEndForNonMule(Tile newTile, Tile lastTile) throws BoardException {
-        if (newTile.getOrientation() == lastTile.getOrientation()) {
-            FaceTile newTileLeftFace = newTile.getLeftFace();
-            FaceTile lastTileRightFace = lastTile.getRightFace();
-            if (newTileLeftFace.getValue() == lastTileRightFace.getValue()) {
-                tiles.addLast(newTile);
+
+        if (!newTile.isMule()) {
+
+            if (newTile.getOrientation() == lastTile.getOrientation()) {
+
+                FaceTile newTileLeftFace = newTile.getRightFace();
+                FaceTile firstTileRightFace = lastTile.getLeftFace();
+
+                if (newTileLeftFace.getValue() == firstTileRightFace.getValue()) {
+                    tiles.addFirst(newTile);
+                } else {
+                    throw new BoardException("The left face must be equal to the tile's right face value.");
+                }
             } else {
-                throw new BoardException("The left face must be equal to the tile's right face value.");
+                throw new BoardException("The orientation must be equal to the tile.");
             }
-        } else {
-            throw new BoardException("The orientation must be different from the last tile's orientation.");
+        }
+
+        if (newTile.isMule()) {
+            if (newTile.getOrientation() != lastTile.getOrientation()) {
+                FaceTile getFirstFace = newTile.getFirstFace();
+                FaceTile firstTileRightFace = lastTile.getLeftFace();
+
+                if (getFirstFace.getValue() == firstTileRightFace.getValue()) {
+                    tiles.addFirst(newTile);
+                } else {
+                    throw new BoardException("Cannot connect a mule tile to another tile if the right face values do not match.");
+                }
+            } else {
+                throw new BoardException("Cannot connect a mule tile to another tile with the same orientation.");
+            }
         }
     }
 
