@@ -403,6 +403,7 @@ public class Match implements Game {
      * @throws GameException if: - No game pool is found in the match. - The
      * match is already in progress, and players cannot pick tiles.
      */
+    @Override
     public void pickTileOfPool(PlayerPickTileDTO playerDTO) throws GameException {
 
         try {
