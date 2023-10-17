@@ -6,7 +6,6 @@ package domain;
 
 import enums.Orientation;
 import enums.Side;
-import interfaces.FaceTilePrototype;
 import java.util.Objects;
 
 /**
@@ -52,33 +51,16 @@ public class Tile {
      * Constructor with the first and second face with a default orientation
      * "Vertical" and the first face is on TOP and the second face is on Bottom
      *
-     * @param firstFace First face of the tile, with default side "TOP"
-     * @param secondFace First face of the tile, with default side "BOTTOM"
      * @param id Id of the tile
+     * @param firstValue
+     * @param secondValue
      */
-    public Tile(Integer id, FaceTilePrototype firstFace, FaceTilePrototype secondFace) {
+    public Tile(Integer id, int firstValue, int secondValue) {
 
         this.id = id;
-        this.firstFace = firstFace.clone();
-        this.secondFace = secondFace.clone();
+        this.firstFace = new FaceTile(firstValue);
+        this.secondFace = new FaceTile(secondValue);
         this.orientation = Orientation.VERTICAL;
-        this.defaultFaceSideValuesByOrientation();
-    }
-
-    /**
-     * Constructor with the faces and an orientation
-     *
-     * @param firstFace First face of the tile
-     * @param secondFace Second face of the tile
-     * @param orientation Orientation of the tile (HORIZONTAL, VERTICAL)
-     * @param id Id of the tile
-     */
-    public Tile(Integer id, FaceTilePrototype firstFace, FaceTilePrototype secondFace, Orientation orientation) {
-
-        this.id = id;
-        this.firstFace = firstFace.clone();
-        this.secondFace = secondFace.clone();
-        this.orientation = orientation;
         this.defaultFaceSideValuesByOrientation();
     }
 
